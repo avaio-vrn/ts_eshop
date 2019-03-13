@@ -1,0 +1,18 @@
+<%= link_to tovar_path(tovar),
+  class:'product-content clfl',  rel: local_assigns[:nofollow] ? 'nofollow' : nil do %>
+  <div class='product-img-container'>
+      <%= image_tag tovar.main_image(:medium), alt: tovar.content_name, class:'product-img' %>
+    </div>
+    <div class='product-description'>
+      <span class='product-text'>
+        <%= tovar.content_name %>
+      </span>
+      <span class='product-price'>
+        <% if local_assigns[:stock] %>
+          <%= price_helper({ price: tovar.first_stock.tovar_stocks.price }){|prc, css| content_tag :i, prc, class: 'price-text' << css } %>
+        <% else %>
+          <%= rub_price_helper(price: tovar.price_in_currency, css: 'price-text', container: :i) %>
+        <% end %>
+      </span>
+    </div>
+  <% end %>

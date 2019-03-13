@@ -1,0 +1,10 @@
+ru:
+  tovar_models:
+    index:
+      header_h1: Модель
+    new:
+      header_h1: Добавление модели
+    edit:
+      header_h1: Редактирование модели
+    update:
+      header_h1: Редактирование модели

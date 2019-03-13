@@ -1,0 +1,17 @@
+<div class='goods-card-cnt'>
+  <div class='goods-card js__goods-wrap'>
+    <% if goods.have_stock? %>
+      <%= content_tag(:span, 'Акция', class:'goods-stock') %>
+    <% end %>
+    <%= link_to  goods, class: 'goods-card-img-cnt' do %>
+      <figure>
+        <%= image_tag(goods.main_image(:medium), class: 'goods-card-img js__goods-image', alt: goods.content_header) %>
+      </figure>
+    <% end %>
+    <%= link_to content_tag(:p, goods.content_name), goods, class: 'goods-card-title' %>
+
+    <div class='goods-card-row'>
+      <%= rub_price_helper price: goods.price_in_rub %>
+    </div>
+  </div>
+</div>

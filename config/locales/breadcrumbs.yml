@@ -1,0 +1,8 @@
+ru:
+  breadcrumbs:
+    tovars: Товары
+    tovar_models: Модель товара
+    news_posts: Новости
+  search:
+    index:
+      header_h1: Результаты поиска

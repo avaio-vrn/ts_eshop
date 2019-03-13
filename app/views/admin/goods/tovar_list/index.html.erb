@@ -1,0 +1,15 @@
+<%= content_for :admin_javascripts do %>
+  <%= javascript_include_tag('admin/simple_search') %>
+  <%= javascript_include_tag('admin/goods/tovar_list') %>
+<% end %>
+<%= content_for :admin_stylesheets, stylesheet_link_tag('admin/goods/tovar_list') %>
+<%= provide :h1, content_tag(:h1, 'Обновление цен', class: 'h1 h1-page bg-fff') %>
+
+<div class='template'>
+  <div class='c-6 padd-lr'>
+    <%= render 'admin/simple_search', model: 'goods', result_partial: 'tovar_list' %>
+  </div>
+</div>
+
+<div class='c-12 js__result padd-lr'>
+</div>

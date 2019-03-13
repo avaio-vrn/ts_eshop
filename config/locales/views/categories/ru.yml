@@ -1,0 +1,10 @@
+ru:
+  categories:
+    index:
+      header_h1: Категории
+    new:
+      header_h1: Добавление новой категории
+    edit:
+      header_h1: Редактирование категории
+    update:
+      header_h1: Редактирование категории

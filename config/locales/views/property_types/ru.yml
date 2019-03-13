@@ -1,0 +1,10 @@
+ru:
+  property_types:
+    index:
+      header_h1: Характеристики
+    new:
+      header_h1: Добавление новую характеристику
+    edit:
+      header_h1: Редактирование характеристику
+    update:
+      header_h1: Редактирование характеристику

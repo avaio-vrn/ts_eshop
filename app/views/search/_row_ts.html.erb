@@ -1,0 +1,25 @@
+<% t1 = t.is_a?(TemplateSystem::TemplateTableContent) ? t.template_content : t  %>
+<% t1 = t1&.template&.content&.contentable %>
+
+<% content_header = t1.content_header.mb_chars.downcase.to_s %>
+<% content_text = t.content_text.mb_chars.downcase.to_s %>
+<% search_f = params[:search_f].mb_chars.downcase.to_s %>
+<% if content_header.index(search_f, 0) || content_text.index(search_f, 0) %>
+  <li class="search-li">
+    <%= link_to polymorphic_path(t1), class:"search-link" do %>
+      <div class="search-title">
+        <span>
+          <%= highlight(t1.content_header, params[:search_f]) unless t1.content_header.nil? %>
+        </span>
+      </div>
+      <div class="search-text">
+        <% index = -1  %>
+        <% while index = content_text.index(search_f, index + 1) %>
+          <% l_index = index - 50 < 0 ? 0 : index - 50 %>
+          <%= highlight('...' + t.content_text[l_index..index+49] + '...', params[:search_f]) %>
+          <br>
+        <% end %>
+      </div>
+    <% end %>
+  </li>
+<% end %>

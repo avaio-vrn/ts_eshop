@@ -1,0 +1,14 @@
+<% if goods %>
+  <% if goods.stock?  %>
+    <div class='goods-stock'>
+      <span class='goods-price-old-ctn'>
+        старая цена
+        <%=  content_tag :span, price_helper(price: goods.price_in_rub_without_stock), class: 'goods-price-old'  %>
+      </span>
+      <%=  rub_price_helper price: goods.price_in_rub, css: 'goods-price'  %>
+    </div>
+  <% else %>
+    <%=  rub_price_helper price: goods.price_in_rub, css: 'goods-price'  %>
+  <% end %>
+<% end %>
+

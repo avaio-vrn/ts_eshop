@@ -1,0 +1,14 @@
+<%= content_for :h1, content_tag(:h1, t("#{params[:controller]}.#{params[:action]}.header_h1") + (@content_name_for_h1 || ''), class: config_get(:html, :h1_class)) %>
+
+<% health_check.actions.each_slice(3) do |group|  %>
+  <div class='template'>
+    <% group.each do |action|  %>
+      <div class='c-4 padd-lr <%= ' rel experiment' if action[:experiment] %>'>
+        <%= link_to action[:name], action[:url], class: 'content-link' %>
+        <p class='small-txt marg-lr--half'>
+          <%= raw action[:description] %>
+        </p>
+      </div>
+    <% end %>
+  </div>
+<% end %>

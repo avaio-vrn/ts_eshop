@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html class='no-js'>
+  <%= render 'head', cashed: true %>
+  <body  class='<%= body_state %>'>
+    <div class='ts-admin-container'>
+      <div class='container wrap'>
+        <%= render 'header', cashed: true %>
+
+        <main>
+          <section>
+            <%= render 'breadcrumbs_system' %>
+
+            <div class='goods-cnt'>
+              <div class='goods-cnt-nav'>
+                <%= catalog_ul %>
+                <div class='adv-cnt bg-fff'>
+                </div>
+              </div>
+
+              <div class='content-cnt-full'>
+                <%= yield :h1 %>
+                <div class='content bg-fff'>
+                  <%= yield %>
+                </div>
+              </div>
+            </div>
+
+
+            <div class='content-cnt'>
+              <aside class='sidebar'>
+                <%= render 'sidebar', cashed: true %>
+              </aside>
+            </div>
+          </section>
+        </main>
+
+        <%= render 'footer', cashed: true %>
+        <%= render_current_basket %>
+      </div>
+
+      <%= javascript_include_tag(:critical) %>
+    </div>
+
+    <%= render 'admin/panel/base' if @admin_panel %>
+    <%= yield :admin_stylesheets %>
+    <%= render 'javascripts' %>
+    <%= javascript_include_tag :admin_template_system if controller.class.to_s.deconstantize.to_sym == :TemplateSystem %>
+    <%= yield :admin_javascripts %>
+  </body>
+</html>

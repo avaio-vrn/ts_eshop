@@ -1,0 +1,5 @@
+<div class='property-field admin-stroke'>
+  <%= f.collection_select :related_id, Tovar.unscoped.order_by_section_and_name, :id, :deep_content_name, { selected: f.object&.related_id }, class:'f-a-input' %>
+
+  <%= link_to_remove_association '', f, { class:'element-close element-close--inside', confirm: 'Удалить?',wrapper_class: 'admin-stroke' } %>
+</div>

@@ -1,0 +1,15 @@
+ru:
+  tovars:
+    index:
+      header_h1: Товар
+    new:
+      header_h1: Добавление товара
+    copy:
+      header_h1: Добавление товара
+    edit:
+      header_h1: Редактирование товара
+    update:
+      header_h1: Редактирование товара
+    ' model-popular': Популярное
+    ' model-new': Новое
+    ' model-action': Акция

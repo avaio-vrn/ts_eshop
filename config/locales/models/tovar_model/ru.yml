@@ -1,0 +1,20 @@
+ru:
+  tovar_model: модель товара
+  activerecord:
+    models:
+      tovar_model: Модель
+      accusative:
+        tovar_model: модель товара
+    attributes:
+      tovar_model:
+        content_name: Наименование модели(если необходимо)
+        vendor_code: Артикул
+        discontinued: Снят с поставки
+        in_stock: В наличии
+        tovar_id: Выберите товар
+        use_in_new: Отображать в новинках
+        price: Цена за единицу
+        popular_model: Популярная модель
+        currency: Валюта
+        unit: Единица измерения
+        quantity: Количество

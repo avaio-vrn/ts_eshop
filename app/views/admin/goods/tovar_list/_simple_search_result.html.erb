@@ -1,0 +1,17 @@
+<% records.each do |tovar|  %>
+  <div class='template admin-stroke'>
+    <div class="c-12 n-lvl1 padd-lr">
+      <%= link_to tovar.content_name, tovar, class: 'content-link bold' %>
+    </div>
+  </div>
+  <% tovar.tovar_models.ordering.each do |tovar_model| %>
+    <div class='template admin-stroke admin-stroke-tight js__goods-row' data-id='<%= tovar_model.id %>'>
+      <div class="c-7 n-lvl2 padd-l">
+        <%= link_to tovar_model.properties_to_s, tovar_model, class: 'content-link'  %>
+      </div>
+      <div class="c-2">
+        <%= text_field_tag :price, tovar_model.price, class: 'f-a-input js__price'  %>
+      </div>
+    </div>
+  <% end %>
+<% end %>

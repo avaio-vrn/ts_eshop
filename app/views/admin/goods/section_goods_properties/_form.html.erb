@@ -1,0 +1,37 @@
+<%= content_for :javascripts, javascript_include_tag('admin/tovar') %>
+
+<div class='template'>
+  <p class='normal-txt error-color padd-lr'>
+    Используйте с осторожностью!
+  </p>
+  <p class='normal-txt error-color padd-lr'>
+    Изменения будут сделаны для всех товаров в категории после нажатия "Сохранить"!
+  </p>
+</div>
+
+<%= form_for(@section_goods_property, html:{ class:'form-add js__template-system' }, validate: false) do |f| %>
+  <%= render "form_errors", object: f.object %>
+
+  <div class="c-6">
+    <div class="f-a-left">
+      <%= f.label :section_id, class:'f-a-label' %>
+      <%= f.collection_select :section_id, Section.order(:content_name), :id, :deep_content_name, { selected: f.object.section_id }, class:'f-a-input' %>
+    </div>
+  </div>
+  <div class='c-6'>
+    <div class="f-a-right">
+      <span class="admin-title">Дополнительные свойства товаров:</span>
+
+      <%= f.fields_for :tovars_properties do |prop| %>
+        <%= render 'tovars_property_fields', f: prop %>
+      <% end %>
+
+      <div class='addition-fields property-types marg'>
+        <%= link_to_add_association 'Добавить свойство<span class="icons icon-add"></span>'.html_safe, f, :tovars_properties,
+          class: 'button-big button-big--l nomarg', data: { 'association-insertion-node' => "this" }, force_non_association_create: true %>
+        </div>
+      </div>
+    </div>
+
+    <div class="clearfloat"></div>
+  <% end %>

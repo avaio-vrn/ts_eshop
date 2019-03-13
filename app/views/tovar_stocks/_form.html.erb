@@ -1,0 +1,39 @@
+<%= form_for(@tovar_stocks, url: tovar_stocks_path, html: { class:'form-add js__template-system' }) do |f| %>
+  <%= render "form_errors", object: f.object %>
+
+  <%= f.hidden_field :tovar_id  %>
+  <div class="c-6 padd-lr">
+    <div class="f-a-left clfl">
+      <div class='c-12'>
+        <%= f.label :date_start, class:'f-a-label' %>
+        <br>
+        <%= f.date_select :date_start, {}, class: 'f-a-input f-a-input--4' %>
+      </div>
+      <div class='c-12'>
+        <%= f.label :date_end, class:'f-a-label' %>
+        <br>
+        <%= f.date_select :date_end, {}, class: 'f-a-input f-a-input--4' %>
+      </div>
+      <div class='c-12'>
+        <%= f.label :price_current, class:'f-a-label' %>
+        <br>
+        <%= f.number_field :price_current, class: 'f-a-input', disabled: true %>
+      </div>
+      <div class='c-12'>
+        <%= f.label :price, class:'f-a-label' %>
+        <br>
+        <%= f.number_field :price, class: 'f-a-input' %>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="c-6 padd-lr">
+    <div class="f-a-right clfl">
+      <div class='c-12'>
+        <%# f.label :content_text, class:'f-a-label' %>
+        <%# f.text_field :content_text, class: 'f-a-input' %>
+      </div>
+    </div>
+  </div>
+<% end %>

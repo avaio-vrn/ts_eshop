@@ -1,0 +1,10 @@
+ru:
+  banners:
+    index:
+      header_h1: Баннеры
+    new:
+      header_h1: Добавление баннеры
+    edit:
+      header_h1: Редактирование баннера
+    update:
+      header_h1: Редактирование баннера

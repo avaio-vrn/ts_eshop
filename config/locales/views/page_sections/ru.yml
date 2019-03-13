@@ -1,0 +1,10 @@
+ru:
+  page_sections:
+    index:
+      header_h1: Страницы раздела
+    new:
+      header_h1: Добавление страницы
+    edit:
+      header_h1: Редактирование страницы раздела
+    update:
+      header_h1: Редактирование страницы раздела

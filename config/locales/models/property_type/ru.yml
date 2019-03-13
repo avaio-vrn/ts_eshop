@@ -1,0 +1,12 @@
+ru:
+  property_type: к характеристике
+  activerecord:
+    attributes:
+      property_type:
+        content_name: Название
+        input_type:
+        value_type: Тип значений
+    models:
+      property_type: Характеристика
+      accusative:
+        property_type: характеристику

@@ -1,0 +1,9 @@
+ru:
+  banner: к баннеру
+  activerecord:
+    models:
+      accusative:
+        banner: баннер
+    attributes:
+      page:
+        in_menu: Отображать в меню навигации

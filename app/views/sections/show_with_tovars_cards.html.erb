@@ -1,0 +1,26 @@
+<%= content_for :javascripts do %>
+  <%= javascript_include_tag('nouislider') %>
+  <%= javascript_include_tag('sections') %>
+  <%= javascript_include_tag('basket') %>
+  <%= javascript_tag("$.filterPath = '#{filter_section_path(@section.id)}'") %>
+<% end %>
+<%= content_for :stylesheets, stylesheet_link_tag('nouislider') %>
+<%= content_for :filter, h_filter %>
+<%= content_for :goods_content_css, ' section-goods-content' %>
+<%= provide :h1, content_tag(:h1, @section.content_header, class: config_get('html', 'h1_class')) %>
+
+<% unless @section.banner.blank? %>
+  <div class='c-12 padd-lr marg-b1'>
+    <%= image_tag @section.banner, class: 'banner--section' %>
+  </div>
+<% end %>
+
+<%= render 'controls_row' %>
+
+<div class='items bg-fff'>
+  <% @tovar_models.includes(:tovar).each do |tovar_model| %>
+    <%= render 'tovar_short', goods: tovar_model.tovar %>
+  <% end %>
+</div>
+
+<%= render 'controls_row' %>

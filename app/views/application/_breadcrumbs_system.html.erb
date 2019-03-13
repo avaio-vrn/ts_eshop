@@ -1,0 +1,9 @@
+<div class='breadcrumbs bg-fff'>
+  <% if action_name == 'index'.freeze %>
+    <%= Breadcrumbs.new(instance_variable_get("@#{controller_name}") || params['controller']).render { |css| 'content-link'.freeze } %>
+  <% elsif action_name == 'new'.freeze %>
+    <%= Breadcrumbs.new(controller_name.to_sym).render { |css| 'content-link'.freeze } %>
+  <% else %>
+    <%= Breadcrumbs.new(instance_variable_get("@#{controller_name.singularize}") || controller_name.to_sym).render { |css| 'content-link'.freeze } %>
+  <% end %>
+</div>

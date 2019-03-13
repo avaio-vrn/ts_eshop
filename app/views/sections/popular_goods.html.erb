@@ -1,0 +1,20 @@
+<%= content_for :h1, content_tag(:h1, @section.content_header, class: 'h1-page') %>
+<%= content_for :javascripts, javascript_include_tag('sections') %>
+
+<div class="items clfl">
+  <% @tovars.each_slice(3) do |group_goods| %>
+    <div class='template'>
+      <% group_goods.each do |goods| %>
+        <div class='c-4'>
+          <%= link_to goods.tovar, class:'catalog-link' do %>
+            <div class='catalog-image'>
+              <%= image_tag goods.main_image(:medium) %>
+            </div>
+            <i><%= goods.tovar.content_name %></i>
+            <span class='catalog-price'><%= rub_price_helper price: goods.price_in_currency %></span>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

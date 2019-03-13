@@ -1,0 +1,14 @@
+<div class="bottom-bar js__cart">
+  <% unless @current_basket.new_record? %>
+    <div class="bottom-cart-cnt wrap">
+      <div class="bottom-cart-info">
+        <i class='fa fa-shopping-cart'></i>     <a class="content-link js__basket-count" href="/baskets">Корзина</a>:
+        <span class='bold'><%= t(:goods, scope: :baskets, count: @current_basket.total_count) %></span>
+        <span class="bar-min-price js__basket-sum">
+          на сумму <%= rub_price_helper price: @current_basket.total_sum, css: 'bold' %>
+        </span>
+      </div>
+      <a class="js__cart-drop main-action-btn" href="/baskets">Оформить заказ</a>
+    </div>
+  <% end %>
+</div>

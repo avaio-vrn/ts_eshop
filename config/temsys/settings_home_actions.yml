@@ -1,0 +1,15 @@
+property_types:
+  id: :property_types
+  url: :property_types
+  name: Характеристики товаров
+  description: Редактирование характеристик товаров
+types:
+  id: :types
+  url: :properties_types
+  name: Доп. характеристики
+  description: Редактирование доп. характеристик
+values:
+  id: :values
+  url: :properties_values
+  name: Значения доп. характеристики
+  description: Редактирование значений доп. характеристик

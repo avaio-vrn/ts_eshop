@@ -1,0 +1,13 @@
+<% content_header = t.content_header.mb_chars.downcase.to_s %>
+<% search_f = params[:search_f].mb_chars.downcase.to_s %>
+<% if t && content_header.index(search_f, 0) %>
+  <li class="search-li">
+    <%= link_to polymorphic_path(t), class:"search-link" do %>
+      <div class="search-title">
+        <span>
+          <%= highlight(t.content_header, params[:search_f]) %>
+        </span>
+      </div>
+    <% end %>
+  </li>
+<% end %>

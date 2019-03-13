@@ -1,0 +1,5 @@
+$('html, body').animate({
+  scrollTop: $('.js__goods').offset().top
+}, 500)
+$('.js__goods').html("<%= j render partial: '/application/goods_card', collection: @welcome_goods %>")
+$('.js__paginate').html("<%= j paginate @welcome_goods, remote: true, theme: 'inpage' %>");

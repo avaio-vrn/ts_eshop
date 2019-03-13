@@ -1,0 +1,31 @@
+
+<div class='content-wrap'>
+  <div class='content'>
+    <div class='template'>
+      <h2 class='h2'>
+        Обновлено
+      </h2>
+      <h3 class='h3'>
+        <%= @import_pricelist.count %> записей.
+      </h3>
+    </div>
+
+    <div class='template'>
+      <h2 class='h2'>
+        Ошибки
+      </h2>
+    </div>
+    <% @import_pricelist.errors.each do |error| %>
+      <div class='template'>
+        <p class='normal-txt'>
+          <%= "Строка №#{error[:row]}" %>
+        </p>
+        <% error[:errors].full_messages.each do |message| %>
+          <p class=normal-txt>
+            <%= message %>
+          </p>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html class='no-js'>
+  <%= render 'head' %>
+  <body class='<%= panel_state %>'>
+    <div class='ts-admin-container'>
+      <div class='wrap container'>
+        <%= render 'header' %>
+        <%= javascript_include_tag(:critical) %>
+
+        <main>
+          <%= yield %>
+        </main>
+
+        <%= render 'footer' %>
+        <%= render_current_basket %>
+      </div>
+    </div>
+
+
+    <%= render 'javascripts' %>
+    <%= yield :admin_panel %>
+  </body>
+</html>

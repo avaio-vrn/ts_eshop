@@ -1,0 +1,112 @@
+<%= form_for(@tovar_model, html:{class:'form-add js__template-system'}) do |f| %>
+  <%= render "form_errors", object: f.object %>
+
+  <div class="c-7 padd-r">
+    <div class="f-a-left">
+      <%= f.label :tovar_id, class:'f-a-label' %>
+      <%= f.collection_select :tovar_id, Tovar.ordering, :id, :content_name, {}, class:'f-a-input' %>
+
+      <% unless config_get('main', 'tovar_model_without_content_name') %>
+        <%= f.label :content_name, class:"f-a-label" %>
+        <%= f.text_field :content_name, class:"f-a-input" %>
+      <% end %>
+
+      <%= f.label :vendor_code, class:"f-a-label" %>
+      <%= f.text_field :vendor_code, class:"f-a-input" %>
+
+      <div class='c-12 marg-t1 multi-inline'>
+        <div class='c-6 multi-inline'>
+          <div class="c-7 block">
+            <%= f.label :unit, class:"f-a-label" %>
+            <%= f.text_field :unit, class:"f-a-input" %>
+          </div>
+          <div class="c-5 block">
+            <%= f.label :quantity, class: 'f-a-label' %>
+            <%= f.text_field :quantity, class: 'f-a-input' %>
+          </div>
+        </div>
+
+        <div class="c-3 block">
+          <%= f.label :currency, class: 'f-a-label' %>
+          <%= f.collection_select :currency, [[0, 'Рубли'], [1, 'Доллары'], [2, 'Евро']], :first, :last, { class: "recomm_select" }, class: 'f-a-input' %>
+        </div>
+
+        <div class="c-3 block">
+          <%= f.label :price, class:"f-a-label" %>
+          <%= f.number_field :price, class:"f-a-input" %>
+        </div>
+      </div>
+      <div class="clearfloat"></div>
+
+      <span class="admin-title">Свойства модели:</span>
+
+      <%= f.fields_for :tovar_models_properties do |prop| %>
+        <%= render 'tovar_models_property_fields', f:prop %>
+      <% end %>
+
+    </div>
+  </div>
+
+  <div class='c-5'>
+    <div class='f-a-right'>
+      <div class="c-6 padd-r">
+        <label class="f-a-checkbox">
+          <%= f.check_box :discontinued %>
+          <span class="f-a-checkbox-span"></span>
+          <%= content_tag :span, f.object.class.human_attribute_name(:discontinued), class: 'f-a-label' %>
+        </label>
+
+        <label class="f-a-checkbox">
+          <%= f.check_box :in_stock %>
+          <span class="f-a-checkbox-span"></span>
+          <%= content_tag :span, f.object.class.human_attribute_name(:in_stock), class: 'f-a-label' %>
+        </label>
+
+      </div>
+
+      <div class="c-6 padd-r">
+        <label class="f-a-checkbox">
+          <%= f.check_box :use_in_new %>
+          <span class="f-a-checkbox-span"></span>
+          <%= content_tag :span, f.object.class.human_attribute_name(:use_in_new), class: 'f-a-label' %>
+        </label>
+        <label class="f-a-checkbox">
+          <%= f.check_box :popular_model %>
+          <span class="f-a-checkbox-span"></span>
+          <%= content_tag :span, f.object.class.human_attribute_name(:popular_model), class: 'f-a-label' %>
+        </label>
+      </div>
+      <div class="clearfloat"></div>
+
+      <span class="admin-title">Доп.фото модели:</span>
+
+      <div class="images">
+        <%= f.fields_for :images do |i| %>
+          <%= render 'image_fields', f:i %>
+        <% end %>
+
+        <div class="addition-fields">
+          <%= link_to_add_association 'Добавить фото<span class="icons icon-add"></span>'.html_safe, f, :images,
+            class: 'button-big button-big--l', partial: 'image_fields', data: {'association-insertion-node' => 'this'} %>
+          </div>
+          <div class="clearfloat"></div>
+
+        </div>
+        <% if config_get(:main, :tovar_model_stock) %>
+          <span class="admin-title">Акция на данную модель:</span>
+          <div class="stock_fields">
+            <%= f.fields_for :tovar_stocks do |i| %>
+              <%= render 'tovar_stocks_fields', f:i %>
+            <% end %>
+
+            <% if f.object.tovar_stocks.blank? %>
+              <%= link_to_add_association 'Добавить акцию<span class="icons icon-add"></span>'.html_safe, f, :tovar_stocks,
+                class: 'button-big button-big--l marg js__one-record', partial: 'tovar_stocks_fields', force_non_association_create: true, data: {'association-insertion-node' => 'this'} %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="clearfloat"></div>
+  <% end %>

@@ -1,0 +1,72 @@
+<% if current_user&.admin? %>
+  <%= content_for :admin_panel do %>
+    <%= render 'admin/panel/base' %>
+    <%= yield :admin_stylesheets %>
+    <%= yield :admin_javascripts %>
+  <% end %>
+<% end %>
+<%= content_for :javascripts, javascript_include_tag('welcome') %>
+
+<section>
+  <h1 class='h1 bg-fff'>Интернет-магазин "ProfФутбол"</h1>
+  <div class='goods-cnt'>
+    <div class='goods-cnt-nav'>
+      <ul class='goods-catalog-ul spec-nav bg-fff'>
+        <li class='goods-catalog-li'><a href='/novinki' class='nav-link-spec'>Новинки</a></li>
+        <li class='goods-catalog-li'><a href='/aktsii' class='nav-link-spec'>Скидки</a></li>
+      </ul>
+      <%= catalog_ul %>
+      <div class='adv-cnt bg-fff'>
+      </div>
+    </div>
+    <div class='goods-content'>
+      <div class='items bg-fff js__goods'>
+        <%= render partial: '/application/goods_card', collection: @welcome_goods %>
+      </div>
+      <div class='goods-list-btns'>
+        <div class='goods-list-btn'>
+          <%= link_to 'Больше товаров', Section.main_sections.first, class: 'content-link' %>
+        </div>
+        <div class='goods-list-btn in-page js__paginate'>
+          <%= paginate @welcome_goods, remote: true, theme: 'inpage' %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class='content-cnt'>
+    <div class='content bg-fff'>
+      <%= render_templates(@page) %>
+    </div>
+
+    <aside class='sidebar sb-r'>
+      <%= render 'sidebar' %>
+    </aside>
+  </div>
+</section>
+
+<div class='partners-cnt bg-fff'>
+  <h2 class='h2'>ПАРТНЕРЫ</h2>
+  <div class='partners-cnt-row'>
+    <figure>
+      <figcaption>ФК «Труд»</figcaption>
+      <%= image_tag 'trud.jpg' %>
+    </figure>
+    <figure>
+      <figcaption>СпортВитал</figcaption>
+      <%= image_tag 'sportvital.jpg' %>
+    </figure>
+    <figure>
+      <figcaption>Северная лига футбола</figcaption>
+      <%= image_tag 'sevlogafut.jpg' %>
+    </figure>
+    <figure>
+      <figcaption>ДФЛ 2015</figcaption>
+      <%= image_tag 'dfl15.jpg' %>
+    </figure>
+    <figure>
+      <figcaption>Воронежский областной спортклуб профсоюзов</figcaption>
+      <%= image_tag 'logo5.jpg' %>
+    </figure>
+  </div>
+</div>

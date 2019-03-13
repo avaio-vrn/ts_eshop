@@ -1,0 +1,10 @@
+ru:
+  section: в раздел
+  activerecord:
+    attributes:
+      section:
+        in_menu: Отображать в меню навигации
+    models:
+      section: Раздел
+      accusative:
+        section: раздел

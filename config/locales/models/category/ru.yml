@@ -1,0 +1,7 @@
+ru:
+  category: в категорию
+  activerecord:
+    models:
+      category: Категория
+      accusative:
+        category: категорию

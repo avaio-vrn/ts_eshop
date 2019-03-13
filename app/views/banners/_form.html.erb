@@ -1,0 +1,35 @@
+<%= content_for :admin_javascripts, javascript_include_tag('ckeditor/init') %>
+
+<%= form_for(@banner, html:{ class:"form-add js__template-system" }, validate: true) do |f| %>
+  <%= render "form_errors", object: f.object %>
+
+  <div class="c-6">
+    <div class="f-a-left">
+      <%= f.label :content_name, class:"f-a-label" %>
+      <%= f.text_field :content_name, class:"f-a-input" %>
+
+      <%= f.label :href, class:"f-a-label" %>
+      <%= f.text_field :href, class:"f-a-input" %>
+    </div>
+  </div>
+
+  <div class="c-6">
+    <div class="f-a-right">
+      <%= f.fields_for :image do |i| %>
+        <%= render 'image_fields', f: i, without_remove: true %>
+      <% end %>
+
+      <div class="clearfloat"></div>
+      <%= f.label :content_text, class: 'f-a-label' %>
+      <%= f.text_area :content_text, class: 'f-a-area ckeditor' %>
+    </div>
+  </div>
+
+
+  <div class="clearfloat"></div>
+  <div class="c-6">
+    <%= render "danger_block", f: f %>
+  </div>
+
+  <div class="clearfloat"></div>
+<% end %>

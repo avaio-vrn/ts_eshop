@@ -1,0 +1,19 @@
+<div class='template'>
+  <span class='template-form-notice c-4'>
+    Информацию на данной странице мы еще не разместили, но обязательно это сделаем.
+    <br><br>
+    Если хотите, Вы можете задать нам вопрос или оставить контактный email и мы ссобщим об обновлении информации.
+  </span>
+
+  <%= form_for ContactForm.new, url:send_question_form_path(no_content: true), remote:true, validate:true, html: {class: 'template-form'} do |f| %>
+    <div class='c-6'>
+      <%= f.text_field :name, placeholder: 'Имя', class: 'template-input', validate: false %>
+      <%= f.text_field :contacts, placeholder: 'Телефон/email на ваш выбор', class: 'template-input' %>
+    </div>
+    <div class='c-6 nopadd'>
+      <%= f.text_area :message, placeholder: 'Сообщение', class: 'template-area', rows: 2 %>
+    </div>
+    <div class='clearfloat'></div>
+    <%= f.submit 'Отправить', class: 'template-submit' %>
+  <% end %>
+</div>

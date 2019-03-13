@@ -1,0 +1,20 @@
+<%= form_for(@property_type, html: { class:"template-form js__template-system" }) do |f| %>
+	<%= render "form_errors", object: f.object %>
+
+	<div class="c-6">
+		<div class="f-a-left">
+			<%= f.label :content_name, class:"f-a-label" %>
+			<%= f.text_field :content_name, class:"f-a-input" %>
+
+			<%= f.label :value_type, class:"f-a-label" %>
+      <%= f.collection_select :value_type, PropertyType.value_type_collection, :first, :last, {}, class:"f-a-input" %>
+		</div>
+	</div>
+
+	<div class="c-12">
+		<div class="f-a-right">
+			<%= render "danger_block", f: f %>
+		</div>
+	</div>
+	<div class="clearfloat"></div>
+<% end %>

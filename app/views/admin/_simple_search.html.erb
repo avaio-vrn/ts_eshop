@@ -1,0 +1,14 @@
+<div class='template'>
+  <div class='c-8'>
+    <input class='js__simple-search-input f-a-input' data-model='<%= model %>' data-partial='<%= result_partial %>' />
+  </div>
+  <div class='clearfloat'></div>
+  <div class='c-8'>
+    <%= label_tag :in_section, class: "f-a-checkbox" do %>
+      <%= check_box_tag :in_section, '', false, class: 'js__simple-search-in-section' %>
+      <span class="f-a-checkbox-span"></span>
+      <%= content_tag :span, 'Искать в категории', class: 'f-a-label' %>
+    <% end %>
+    <%= select_tag :section_id,  options_from_collection_for_select(Section.order(:content_name), :id, :deep_content_name) , class:'f-a-input js__simple-search-section' %>
+  </div>
+</div>

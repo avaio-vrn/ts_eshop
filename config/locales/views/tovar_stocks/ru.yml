@@ -1,0 +1,4 @@
+ru:
+  tovar_stocks:
+    new:
+      header_h1: Скидка на все модели %{obj}

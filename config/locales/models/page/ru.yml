@@ -1,0 +1,9 @@
+ru:
+  page: на страницу
+  activerecord:
+    models:
+      accusative:
+        page: страницу
+    attributes:
+      page:
+        in_menu: Отображать в меню навигации

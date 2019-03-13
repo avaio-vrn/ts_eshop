@@ -1,0 +1,51 @@
+<header>
+  <div class='header-content'>
+    <a href='/' class='logo-cnt'>
+      <figure>
+        <%= image_tag 'logo.png', alt: 'Логотип ProfФутбол', class: 'logo-img' %>
+      </figure>
+    </a>
+    <div class='search-tagline-cnt'>
+      <div class="search-cnt">
+        <%= render_search_form %>
+      </div>
+      <p class='tagline'>
+        <%= @biz_info.tagline  %>
+      </p>
+    </div>
+  </div>
+
+  <div class="header-content-right">
+    <div class='reg-links'>
+      <% if current_user %>
+        <%= link_to 'Личный кабинет', authentication_user.user_path(current_user), class: 'content-link' %>
+        <a class='content-link' href='/logout'>Выход</a>
+      <% else %>
+        <span class='content-link js__login'>Вход</span>
+        <span class='content-link js__reg'>Регистрация</span>
+      <% end %>
+    </div>
+    <div class='contacts-cnt'>
+      <div class='phone'>
+        <%= @biz_info.phone %>
+      </div>
+      <div class='social-links'>
+        <%= link_to image_tag('instagram_ico.jpg'), 'https://www.instagram.com/proffootball.ru', rel: 'nofollow' %>
+        <%= link_to image_tag('vk_ico.jpg'), 'https://vk.com/proffootball_ru', rel: 'nofollow' %>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<nav>
+  <div class="wrap button-container">
+    <span class="nav-open js__button" data-assoc-c='navactive'></span>
+    <div class='navigation'>
+      <ul>
+        <li><%= link_to 'Каталог', sections_path, class: 'nav-link nav-link-btn' %></li>
+        <%= h_main_menu_li %>
+      </ul>
+    </div>
+  </div>
+</nav>

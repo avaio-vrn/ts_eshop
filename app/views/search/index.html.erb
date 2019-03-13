@@ -1,0 +1,36 @@
+<%= provide :h1, content_tag(:h1, "Результаты поиска «#{params[:search_f]}»", class: config_get('html', 'h1_class')) %>
+<%= content_for :stylesheets, stylesheet_link_tag('search') %>
+
+<% unless @finding_tovars&.dig(:full).blank? %>
+  <h2 class='h2'>Найденые товары</h2>
+  <div class='search-results items'>
+    <% @finding_tovars[:full].each do |search_result| %>
+      <%= render 'goods_card', goods_card: search_result %>
+    <% end %>
+  </div>
+<% end %>
+
+<div class='clearfloat'></div>
+
+<% unless @searches_blank %>
+  <h2 class='h2'>Найдено в описаниях</h2>
+<% end %>
+
+<% @searches.each do |result| %>
+  <ol class='search-results'>
+    <% result[:full].each_with_index do |search_result, index| %>
+      <% if search_result.is_a?(TemplateSystem::TemplateTableContent) || search_result.is_a?(TemplateSystem::TemplateContent)  %>
+        <%= render 'search/row_ts', t: search_result, index: index %>
+      <% else %>
+        <%= render 'search/row', t: search_result, index: index %>
+      <% end %>
+    <% end %>
+  </ol>
+<% end %>
+
+<% if @finding_tovars&.dig(:full).blank? && @searches_blank %>
+  <div class='template'>
+    <span class='search-none'>К сожалению, ничего не найдено</span>
+  </div>
+<% end %>
+

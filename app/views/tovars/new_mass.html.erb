@@ -1,0 +1,34 @@
+<%= content_for :stylesheets, stylesheet_link_tag('admin/tovars') %>
+<%= content_for :javascripts, javascript_include_tag('admin/tovars/new_mass') %>
+
+<%= provide :h1, content_tag(:h1, 'Добавление моделей товара', class: 'h1-page') %>
+
+<div class='template'>
+  <h2>Формат данных</h2>
+  <span>
+    Разделение свойств ' - ' пробел дефис пробел. НЕ допускай таких значений свойств.
+  </span>
+    <br>
+    <span>*Валюта - если не указано, то рубли</span>
+</div>
+<div class='template'>
+  <h3>
+    <div class='js__descr'>
+      Артикул -
+    </div>
+    <%= @properties.inject(''.html_safe) { |m, e| m  + content_tag(:p, "#{e.to_s} - ") } %>
+    Цена - Валюта<span>(0 - р., 1 - $, 2 - €)</span>
+  </h3>
+</div>
+<%= form_tag create_mass_tovar_path(r_id: params[:tovar_id]), class: 'form-add js__template-system' do |f| %>
+  <%= hidden_field_tag :tovar_id, params[:tovar_id] %>
+  <%= hidden_field_tag :tovar_properties,  @properties.inject([]) { |m, e| m.push e.id } %>
+
+  <label class="f-a-checkbox">
+    <%= check_box_tag :without_vendor_code %>
+    <span class="f-a-checkbox-span"></span>
+  </label>
+  <%= label_tag :without_vendor_code, 'Модели без артикула', class: "f-a-label" %>
+
+  <%= text_area_tag :list_models, nil, class: 'f-a-area' %>
+<% end %>

@@ -1,0 +1,13 @@
+ru:
+  tovar_stocks: акция
+  activerecord:
+    models:
+      tovar_stocks: Акция
+      accusative:
+        tovar_stocks: акция
+    attributes:
+      tovar_stocks:
+        date_start: Начало дейстивия скидки (в разработке)
+        date_end: Окончание действия скидки (в разработке)
+        price_current: Текущая цена (минимальная)
+        price: Цена со скидкой

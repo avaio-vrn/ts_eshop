@@ -1,0 +1,235 @@
+default: &default_index_and_show
+  index:
+    actions:
+      primary: []
+    add_index_actions: {}
+  show:
+    actions:
+      primary: []
+    add_show_actions: {}
+default: &blank_actions_without_seo
+  index:
+    actions: []
+    seo_actions: false
+### refact TS_ESHOP### refact TS_ESHOP### refact TS_ESHOP### refact TS_ESHOP### refact TS_ESHOP### refact TS_ESHOP### refact TS_ESHOP
+admin:
+  base:
+    home:
+      actions:
+        primary: [
+          { href_name: 'Разделы', obj: ':sections' },
+          { href_name: 'Добавить раздел',  obj: ':section', arg: { action: ':new' }, br: true },
+          { href_name: 'Базовые страницы', obj: ':pages', href_class: 'icon-page' },
+          { href_name: 'Добавить баз.страницу', obj: ':page', arg: { action: ':new' }, br: true }]
+        additional: [
+          { href_name: 'Настройки', model_engine: ':template_system', namespace: 'template_system', obj: ':settings', href_class: 'icon-gear', br: true },
+          { href_name: 'Пользователи', model_engine: ':authentication_user', namespace: '', obj: ':users', br: true },
+          { href_name: 'Баннеры', namespace: '', obj: ':banners', br: true },
+          { href_name: 'Характеристики товара', namespace: '', obj: ':property_types', br: true }]
+      edit_content: true
+    aktsii:
+      <<: *default_index_and_show
+      edit_content: true
+  pages:
+    index:
+      actions: []
+      add_index_actions: {}
+      seo_actions: false
+    show:
+      actions:
+        primary: [{ href_name: 'Базовые страницы', obj: ':pages', href_class: 'icon-page' }]
+      add_show_actions: {}
+  sections:
+    index:
+      actions:
+        primary: [{ href_name: 'Добавить подраздел', obj: ':section', arg: { action: ':new', parent_id: '@parent_id' }, br: true }]
+      add_index_actions: {}
+      seo_actions: false
+    show:
+      actions:
+        primary: [
+          { href_name: 'Товары раздела', namespace: '', obj: ':tovars', arg: { section_id: '@section.id' }, if: '@has_tovars' },
+          { href_name: 'Добавить товар', namespace: '', obj: ':tovar', arg: { action: ':new', section_id: '@section.id' }, br: true, if: '@has_tovars' },
+          { href_name: 'Подразделы', obj: ':sections', arg: { parent_id: '@section.id' }, if: '@has_child_sections' },
+          { href_name: 'Добавить подраздел', obj: ':section', arg: { action: ':new', parent_id: '@section.id' }, br: true, if: '@has_child_sections' }]
+        additional: [
+          { href_name: 'Шаблон для характеристик', namespace: 'admin_goods', obj: ':section_goods_property', arg: { id: '@section.id', action: ':edit' }},
+          { href_name: 'Рекламный баннер', namespace: '', obj: ':pages_banners', arg: { root_type: 'Section', root_id: '@section.id' }}]
+      add_show_actions: { opt: { without_new: true }}
+  page_sections:
+    index:
+      actions: []
+      add_index_actions: {}
+      seo_actions: false
+    show:
+      actions:
+        primary: [{ href_name: 'Страницы', obj: ['@section', '::PageSection'], href_class: 'icon-page' }]
+      add_show_actions: {}
+  ###TS ACTIONS --TS ACTIONS --TS ACTIONS --TS ACTIONS --TS ACTIONS --TS ACTIONS --TS ACTIONS --TS ACTIONS
+  biz_info:
+    show:
+      actions:
+        primary: [
+          { href_name: 'Редактировать информацию', module: ':template_system', namespace: '', obj: ':biz_info', arg: { id: ':main', action: ':edit' }},
+          { href_name: 'Редактировать логотип', href_class: ':edit', module: ':template_system', namespace: '', obj: ':biz_info', arg: { id: ':logo', action: ':edit' }, br: true },
+          { href_name: 'Редактировать счетчики', module: ':template_system', namespace: '', obj: ':biz_info', arg: { id: ':seo', action: ':edit' }, br: true },
+          { href_name: 'Настройка СМС', module: ':template_system', namespace: '', obj: ':biz_info', arg: { id: ':sms', action: ':edit' }, br: true }]
+      seo_actions: false
+    edit_logo:
+      actions: []
+      href_save: true
+      seo_actions: false
+  home:
+    <<: *blank_actions_without_seo
+  sitemap:
+    <<: *blank_actions_without_seo
+    show:
+      actions: []
+      seo_actions: false
+  fix_row_num:
+    edit:
+      actions:
+        primary: [
+          { href_name: 'Присвоить автоматически', model_engine: ':template_system', obj: ':fix_row_num',
+            arg: '@args_auto_fix', method: ':post', href_class: 'icon-save', br: true },
+          { href_name: 'Далее без сохранения', model_engine: ':template_system', obj: ':fix_row_num',
+            arg: '@args_cancel_fix', method: ':post', href_class: 'icon-abort' }]
+      seo_actions: false
+template_system:
+  content:
+    show:
+      actions:
+        primary: [
+          { href_name: 'Добавить контент', module: ':template_system', namespace: '', obj: ':template_system_new_template', remote: true,
+            href_class: 'icon-new', arg: { id: '@content.id' }, br: true },
+          { href_name: 'Добавить блок текста', module: ':template_system', namespace: '', obj: ':template_system_new_template', remote: true, 
+            href_class: 'icon-new', arg: { id: '@content.id', block: 1 }, br: true }]
+        additional: [
+          { href_name: 'Пометить все на удаление', module: ':template_system', obj: ':set_del_templates', namespace: 'admin', href_class: "icon-delete",
+            arg: { namespace: 'template_system', md: ':content', md_id: '@content.id', assoc: ':templates', assoc_path: ':template_system_content' }},
+          { href_name: 'Снять все на удаление', module: ':template_system', obj: ':set_del_templates', namespace: 'admin', href_class: "icon-delete icon-cancel-delete",
+          arg: { namespace: 'template_system', md: ':content', md_id: '@content.id', assoc: ':templates', assoc_path: ':template_system_content', cancel: 1 }}]
+      seo_actions: false
+  template_types:
+    index:
+      actions: []
+      add_index_actions: {}
+      seo_actions: false
+###TS ESHOP -- TS ESHOP -- TS ESHOP -- TS ESHOP -- TS ESHOP -- TS ESHOP -- TS ESHOP -- TS ESHOP -- TS ESHOP -- TS ESHOP
+tovars:
+  index:
+    actions:
+      primary: []
+      additional: [
+        { href_name: 'Товары снятые с поставки', namespace: '', obj: ':tovars', arg: { section_id: '@section_id', discontinued: 'true' }},
+        { href_name: 'Товары нет в наличии', namespace: '', obj: ':tovars', arg: { section_id: '@section_id', in_stock: 'false' }},
+        { href_name: 'Товары на удаление', namespace: '', obj: ':tovars', arg: { section_id: '@section_id', del: 'true' }}
+      ]
+    add_index_actions: { arg: { section_id: '@section_id' }, opt: { index_action: { name: 'Товары раздела' }}}
+    seo_actions: false
+  show:
+    actions:
+      primary: [
+        { href_name: 'Модели товара', obj: ':tovar_models', arg: { tovar_id: '@tovar.id' }, href_class: 'icon-page' },
+        { href_name: 'Добавить модель', obj: ':tovar_model', arg: {action: ':new', tovar_id: '@tovar.id' }, href_class: 'icon-new', br: true },
+        { href_name: 'Редактировать модель', obj: '@tovar.first_model', arg: { action: ':edit' }, href_class: 'icon-edit', if: '@tovar_models_one' },
+        { href_name: 'Добавить модели(масс.)', obj: ':tovar', arg: { action: ':new_mass', tovar_id: '@tovar.id' }, href_class: 'icon-new', br: true },
+        { href_name: 'Яндекс.Маркет', obj: '@tovar.first_model', arg: { action: ':yandex_market_form', tovar_model_id: '@tovar.first_model.id' }, href_class: 'icon-edit', if: '@tovar_models_one' },
+        { href_name: 'Копировать товар', obj: ':tovar', arg: { action: ':copy', tovar_id: '@tovar.id' }, href_class: 'icon-new', br: true, hr: true },
+        { href_name: 'Товары раздела', obj: ':tovars', arg: { section_id:  '@section_id' }, href_class: 'icon-page' }]
+      additional: [
+        { href_name: 'Скидка на все модели', obj: ':tovar_stock', arg: { action: 'new', tovar_id: '@tovar.id' }, br: true },
+        { href_name: 'Характеристики товара', obj: ':tovars_properties', arg: { tovar_id: '@tovar.id' }, br: true },
+        { href_name: 'Рекламный баннер', obj: ':pages_banners', arg: '@pages_banner_args' }]
+    add_show_actions: { arg: { section_id: '@section_id' }}
+  new_mass:
+    actions: []
+    href_save: true
+    seo_actions: false
+  copy:
+    actions: []
+    href_save: true
+    seo_actions: false
+tovar_models:
+  index:
+    actions:
+      primary: [
+        { href_name: 'Товар', obj: '@tovar', href_class: 'icon-page' },
+        { href_name: 'Редактировать товар', obj: '@tovar', arg: { action: ':edit' }, href_class: 'icon-edit', br: true }]
+    add_index_actions: { arg: { tovar_id: '@tovar_id' }}
+    seo_actions: false
+  show:
+    actions:
+      primary: [
+        { href_name: 'Товары раздела', obj: ':tovars', arg: { section_id:  '@tovar.section_id' }, href_class: 'icon-page' },
+        { href_name: 'Редактировать товар', obj: '@tovar', arg: { action: ':edit' }, href_class: 'icon-edit', br: true },
+        { href_name: 'Яндекс.Маркет', obj: '@tovar_model', arg: { action: ':yandex_market_form', tovar_model_id: '@tovar_model.id' }, href_class: 'icon-edit', br: true },
+        { href_name: 'Модели товара', obj: ':tovar_models', arg: { tovar_id: '@tovar_id' }, href_class: 'icon-page' }]
+    add_show_actions: { arg: { tovar_id: '@tovar_id' }}
+  yandex_market_form:
+    actions: []
+    href_save: true
+    seo_actions: false
+import_pricelist:
+  new:
+    actions: []
+    href_save: true
+    seo_actions: false
+  create:
+    actions: [{ href_name: 'Загрузить прайс-лист', obj: ':import_pricelist', arg: { action: ':new' }, br: true }]
+    seo_actions: false
+baskets:
+  <<: *default_index_and_show
+  index:
+    add_index_actions: { opt: { without_new: true }}
+  show:
+    add_index_actions: { opt: { without_new: true }}
+banners:
+  index:
+    actions: []
+    add_index_actions: {}
+    seo_actions: false
+  show:
+    actions: []
+    add_show_actions: {}
+    seo_actions: false
+pages_banners:
+  index:
+    actions:
+      primary: [
+        { href_name: 'Добавить баннер', namespace: '', obj: ':pages_banner', arg: '@pages_banner_args', br: true },
+        { href_name: 'Вернуться на страницу', namespace: '', obj: '@return_page' }]
+      bottom: { href_name: 'Вернуться на страницу', namespace: '', obj: '@return_page' }
+    seo_actions: false
+property_types:
+  <<: *default_index_and_show
+###TS LAYOUT --TS LAYOUT --TS LAYOUT --TS LAYOUT --TS LAYOUT --TS LAYOUT --TS LAYOUT --TS LAYOUT --TS LAYOUT --TS LAYOUT
+theme:
+  index:
+    actions:
+      primary: [{ href_name: 'Редактировать макет', obj: ':edit_theme', href_class: "icon-edit", remote: true, br: true }]
+      additional: [{ href_name: 'Редактировать css стили', obj: ':edit_theme_styles', href_class: "icon-edit", br: true}]
+    href_save: true
+    seo_actions: false
+theme_styles:
+  index:
+    actions:
+      primary: []
+    href_save: true
+    seo_actions: false
+###AUTHENTICATION USER -- AUTHENTICATION USER -- AUTHENTICATION USER -- AUTHENTICATION USER -- AUTHENTICATION USER
+users:
+  index:
+    add_index_actions: {}
+    seo_actions: false
+  show:
+    add_show_actions: {}
+    seo_actions: false
+###SEO -- SEO -- SEO -- SEO -- SEO -- SEO -- SEO -- SEO -- SEO -- SEO -- SEO -- SEO -- SEO -- SEO -- SEO -- SEO
+meta_tags:
+  index:
+    actions: 
+      primary: [
+        { href_name: 'Title добавить мета', href_class: "icon-new", remote: true, arg: { action: 'new', seo_meta_tag: '@title_params'}, br: true },
+        { href_name: 'Description добавить мета', href_class: "icon-new", remote: true, arg: { action: 'new', seo_meta_tag: '@description_params' }, br: true }]
+    seo_actions: false

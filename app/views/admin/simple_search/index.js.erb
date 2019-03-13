@@ -1,0 +1,20 @@
+$('.js__result').html('<%=j render partial, records: records  %>')
+
+<% unless records.blank? %>
+  $('.js__result').append('<button class="f-a-button js__simple-search-next-page" name="button" data-next-page="<%= (params['page'] || 1).next %>">Следующие 10</button>')
+  $('.js__simple-search-next-page').off('click').on('click', function(e) {
+    searchAjax($(e.target).data('next-page'));
+  })
+<% end %>
+
+if (typeof(initGlobalDataSet) == 'undefined') {
+  var script = document.createElement('script');
+  script.src = '<%= ActionController::Base.helpers.asset_path("init_global.js") %>';
+
+  document.body.appendChild(script);
+}
+iconGlobalDataSet('<%= raw json_for_icon_global_data(records, nil) %>', 'tsSimpleSearchData')
+
+if (typeof(simpleSearchCallback) == 'function') {
+  simpleSearchCallback();
+}

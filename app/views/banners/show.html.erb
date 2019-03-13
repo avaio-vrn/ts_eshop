@@ -1,0 +1,33 @@
+<%= content_for :admin_javascripts do %>
+  <%= javascript_include_tag(:init_global) %>
+  <%= javascript_tag("iconGlobalDataSet('#{json_for_icon_global_data(@banner.pages_banners, nil)}');") %>
+  <%= javascript_include_tag('admin/simple_search') %>
+  <%= javascript_include_tag('banner') %>
+<% end %>
+<%= provide :h1, content_tag(:h1, @banner, class: config_get(:html, :h1_class)) %>
+
+<div class='template images-ctr'>
+  <div class='c-3'>
+    <figure>
+      <%= image_tag @banner.image.url(:medium) %>
+    </figure>
+  </div>
+  <div class=' padd-l c-9'>
+    <%= raw @banner.content_text %>
+  </div>
+</div>
+<div class='template'>
+  <div class='c-5 padd-r'>
+    <% @banner.pages_banners.each_with_index do |page, index| %>
+      <div class="admin-stroke clfl" data-index='<%= index %>'>
+        <%= page.root.to_s %>
+        <a class='element-close element-close--inside js__destroy'></a>
+      </div>
+    <% end %>
+  </div>
+  <div class='c-7 padd-l'>
+      <%= render 'admin/simple_search', model: 'pages_goods', result_partial: 'pages_banner' %>
+    <div class='c-12 js__result'>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+<%= content_for :javascripts, javascript_include_tag('sections') %>
+<%= provide :h1, content_tag(:h1, @section.content_header, class: config_get('html', 'h1_class')) %>
+
+<div class='items bg-fff'>
+  <% @child_sections.each do |section| %>
+    <div class='goods-card-cnt'>
+      <div class='goods-card'>
+        <%= link_to  section, class: 'goods-card-img-cnt' do %>
+          <figure>
+            <%= image_tag(section.main_image(:medium), class: 'goods-card-img', alt: section.content_header) %>
+          </figure>
+        <% end %>
+        <%= link_to content_tag(:p, section.content_name), section, class: 'section-title' %>
+      </div>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,13 @@
+ru:
+  pages:
+    index:
+      header_h1: Базовые страницы
+  admin/pages:
+    index:
+      header_h1: Базовые страницы
+    new:
+      header_h1: Добавление страницы
+    edit:
+      header_h1: Редактирование базовой страницы
+    update:
+      header_h1: Редактирование базовой страницы

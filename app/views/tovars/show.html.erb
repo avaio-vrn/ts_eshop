@@ -1,0 +1,65 @@
+<%= content_for :javascripts do %>
+  <%= javascript_include_tag('tovar') %>
+  <%= javascript_include_tag('basket') %>
+  <%= javascript_tag("window.dataLayer = window.dataLayer || [];window.dataLayer.push(#{@tovar.ecommerce})") %>
+<% end %>
+<%= content_for :content, content_tag(:div, content_tag(:h2, 'Описание и особенности', class:'h2 h2--content'), class: :template) %>
+<%= provide :h1, content_tag(:h1, @tovar.content_header, class: config_get('html', 'h1_class')) %>
+
+
+<div class='c-12 goods-choice-title h2 bg-fff'>
+  ВЫБОР МОДЕЛИ
+</div>
+
+<%= content_tag :div, class: 'c-12 goods-show-cnt bg-fff js__goods-wrap', data: @tovar.show_action_data_hash do %>
+  <div class='goods-show-lf-cnt'>
+    <div class='goods-image-cnt js__goods-image'>
+      <figure>
+        <%= image_tag @tovar.main_image(:medium) %>
+      </figure>
+    </div>
+    <div class='goods-image-slid'>
+    </div>
+    <div class='goods-2-fff-btns'>
+      <div class='goods-fff-btn goods-compare-btn'><i class='fa fa-balance-scale'></i>сравнить</div>
+      <div class='goods-fff-btn goods-want-btn'><i class='fa fa-heart-o'></i>хочу</div>
+    </div>
+  </div>
+  <div class='goods-prop-cnt js__goods-choice-model'>
+    <% @tovar.all_model_property_types.each do |p_type| %>
+      <%= content_tag :p, p_type.content_name, class: 'goods-prop-title'  %>
+      <div class='goods-prop-values' data-pt='<%= p_type.id %>'>
+        <% @tovar.all_model_property_value_by_id(p_type.id).each do |k, v| %>
+          <%= content_tag :span, k, class: 'goods-prop-value js__goods-model-prop', data: { 'tm' => v }  %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+  <div class='goods-price-cnt'>
+    <div class='js__goods-price'>
+      <%= render 'price', goods: @tovar.current_model %>
+    </div>
+    <% if @tovar.in_stock %>
+      <% if @tovar.current_model %>
+        <div class='goods-cart-add-btn js__basket-add'>
+          <i class='fa fa-cart-plus fa-invers'></i>
+          добавить в корзину
+        </div>
+      <% end %>
+    <% else %>
+      <p class='normal-txt'>
+        Товар доступен только под заказ.
+      </p>
+      <p class='normal-txt'>
+        Свяжитесь с менеджером магазина.
+      </p>
+    <% end %>
+  </div>
+<% end %>
+
+<div class='goods-show-similar-cnt bg-fff'>
+  <h3 class='h3'><%= @tovar.relevant(5)[:title] %></h3>
+  <div class='goods-show-similar-goods'>
+    <%= render partial: '/sections/tovar_mini', collection: @tovar.relevant(5)[:goods], as: :goods %>
+  </div>
+</div>

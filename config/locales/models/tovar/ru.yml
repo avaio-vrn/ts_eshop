@@ -1,0 +1,13 @@
+ru:
+  tovar: товар
+  activerecord:
+    models:
+      tovar: Товар
+      accusative:
+        tovar: товар
+    attributes:
+      tovar:
+        section_id: Раздел
+        popular_product: Популярный товар
+        discontinued: Снят с поставки
+        in_stock: В наличии

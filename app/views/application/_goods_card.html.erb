@@ -1,0 +1,17 @@
+<div class='goods-card-cnt'>
+  <div class='goods-card'>
+    <%= link_to  goods_card, class: 'goods-card-img-cnt' do %>
+      <figure>
+        <%= image_tag(goods_card.main_image(:medium), class: 'goods-card-img', alt: goods_card.content_header) %>
+      </figure>
+    <% end %>
+    <%= link_to content_tag(:p, goods_card.content_name), goods_card, class: 'goods-card-title' %>
+    <div class='goods-card-row'>
+      <%= link_to goods_card, class: 'goods-cart-add-btn' do %>
+        <i class='fa fa-cart-plus fa-invers'></i>
+        купить
+      <% end %>
+      <%= rub_price_helper price: goods_card.price_in_rub %>
+    </div>
+  </div>
+</div>

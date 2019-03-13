@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html class='no-js'>
+  <%= render 'head', cashed: true %>
+  <body  class='<%= body_state %>'>
+    <div class='container wrap'>
+      <%= render 'header', cashed: true %>
+
+      <main>
+        <section>
+          <%= render 'breadcrumbs_system' %>
+
+          <div class='goods-cnt'>
+            <div class='goods-cnt-nav'>
+              <%= catalog_ul %>
+              <div class='adv-cnt bg-fff'>
+                <%= yield :filter %>
+              </div>
+            </div>
+            <div class='goods-list-cnt'>
+              <%= yield :h1 %>
+              <div class='goods-content <%= yield :goods_content_css %>'>
+                <%= yield %>
+              </div>
+            </div>
+          </div>
+
+
+          <div class='content-cnt'>
+            <aside class='sidebar <%= 'sb-row' if empty_templates? %>'>
+              <%= render 'sidebar', cashed: true %>
+            </aside>
+
+            <% unless empty_templates? %>
+              <div class='content bg-fff'>
+                <%= yield :content %>
+                <%= render_templates %>
+              </div>
+            <% end %>
+          </div>
+        </section>
+      </main>
+
+      <%= render 'footer', cashed: true %>
+      <%= render_current_basket %>
+    </div>
+
+    <%= render 'javascripts' %>
+    <%= render_flashes %>
+  </body>
+</html>

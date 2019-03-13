@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html class='no-js'>
+  <%= render 'head', cashed: true %>
+  <body  class='<%= body_state %>'>
+    <div class='wrap container'>
+      <%= render 'header', cashed: true %>
+
+      <main>
+        <%= yield %>
+      </main>
+
+      <%= render 'footer', cashed: true %>
+      <%= render_current_basket %>
+    </div>
+
+    <%= render 'javascripts' %>
+    <%= render_flashes %>
+  </body>
+</html>

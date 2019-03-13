@@ -1,0 +1,4 @@
+
+<% @property_type.tovars.each do |tovar| %>
+  <%= content_tag :p, link_to(tovar.to_s, tovar) %>
+<% end %>

@@ -1,0 +1,6 @@
+<%= content_for :content, render_templates(@page) %>
+<%= provide :h1, content_tag(:h1, "Акции и спецпредложения", class: config_get('html', 'h1_class')) %>
+
+<div class='items bg-fff js__goods'>
+  <%= render partial: '/application/goods_card', collection: @stock_goods %>
+</div>

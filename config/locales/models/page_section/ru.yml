@@ -1,0 +1,9 @@
+ru:
+  page_section: на страницу
+  activerecord:
+    models:
+      accusative:
+        page_section: страницу
+    attributes:
+      page_section:
+        section_id: Родительская страница

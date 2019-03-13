@@ -1,0 +1,6 @@
+<% if page.current?%>
+  <%= content_tag :span, page, class: 'kami-link k-l-active' %>
+<% else %>
+  <%= link_to page, url, rel: page.next? ? 'next nofollow' : page.prev? ? 'prev nofollow' : 'nofollow', class: 'kami-link' %>
+<% end %>
+

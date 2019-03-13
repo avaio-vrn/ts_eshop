@@ -1,0 +1,83 @@
+<%= form_for(@tovar, html:{ class:'form-add js__template-system' }, validate: true) do |f| %>
+  <%= render "form_errors", object: f.object %>
+
+  <div class="c-6 padd-lr">
+    <div class="f-a-left clfl">
+      <%= f.label :section_id, class:'f-a-label' %>
+      <%= f.collection_select :section_id, Section.order(:content_name), :id, :deep_content_name, { selected: f.object.section_id }, class:'f-a-input' %>
+
+      <%= f.label :content_name, class:"f-a-label" %>
+      <%= f.text_field :content_name, class:"f-a-input" %>
+
+      <%= f.label :content_header, class:"f-a-label" %>
+      <%= f.text_field :content_header, class:"f-a-input" %>
+
+      <%= f.fields_for :annotate do |a| %>
+        <%= a.label :content_text, class:"f-a-label" %>
+        <%= a.text_area :content_text, class:"f-a-area height-i", rows: 3 %>
+      <% end %>
+
+      <div class="c-6 padd-r">
+        <label class="f-a-checkbox">
+          <%= f.check_box :in_stock %>
+          <span class="f-a-checkbox-span"></span>
+          <%= content_tag :span, f.object.class.human_attribute_name(:in_stock), class: 'f-a-label' %>
+        </label>
+      </div>
+
+      <div class="c-6 padd-l">
+        <label class="f-a-checkbox">
+          <%= f.check_box :discontinued %>
+          <span class="f-a-checkbox-span"></span>
+          <%= content_tag :span, f.object.class.human_attribute_name(:discontinued), class: 'f-a-label' %>
+        </label>
+      </div>
+
+
+      <span class="admin-title">Основное фото товара:</span>
+
+      <div class="images">
+        <%= f.fields_for :image do |i| %>
+          <%= render 'image_fields', f: i, without_remove: true %>
+        <% end %>
+        <div class="clearfloat"></div>
+      </div>
+      <div class='c-12'>
+        <span class="admin-title marg-tb">Сопутствующие товары:</span>
+
+        <%= f.fields_for :goods_relateds do |prop| %>
+          <%= render 'goods_related_fields', f: prop %>
+        <% end %>
+
+        <div class='addition-fields property-types marg'>
+          <%= link_to_add_association 'Добавить сопутствующий<span class="icons icon-add"></span>'.html_safe, f, :goods_relateds,
+            class: 'button-big button-big--l nomarg', data: { 'association-insertion-node' => "this" } %>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class='c-6 padd-lr'>
+      <div class="f-a-right">
+
+        <div class='c-12'>
+          <span class="admin-title marg-tb">Дополнительные свойства товара:</span>
+
+          <%= f.fields_for :tovars_properties do |prop| %>
+            <%= render 'tovars_property_fields', f: prop %>
+          <% end %>
+
+          <div class='addition-fields property-types marg'>
+            <%= link_to_add_association 'Добавить свойство<span class="icons icon-add"></span>'.html_safe, f, :tovars_properties,
+              class: 'button-big button-big--l nomarg', data: { 'association-insertion-node' => "this" } %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="clearfloat"></div>
+      <div class='c-6 marg'>
+        <%= render "danger_block", f: f %>
+      </div>
+      <div class="clearfloat"></div>
+    <% end %>

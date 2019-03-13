@@ -1,0 +1,46 @@
+<div class='c-12 bg-fff'>
+  <div class='controls-container'>
+    <!-- <div class='js__filter&#45;button view&#45;filter&#45;button'>Фильтр</div> -->
+    <div class='control-cnt'>
+      <div class="controls-title">
+        Отображение<br /> списка
+      </div>
+      <div class="view-list-controls">
+        <%= content_tag :span, class: 'js__view-button view-button view-button--list' << h_view_button_active(:list) do %>
+          <span class='view-button-1'></span>
+          <span class='view-button-2'></span>
+          <span class='view-button-3'></span>
+          <span class='view-button-4'></span>
+        <% end %>
+        <%= content_tag :span, class: 'js__view-button view-button view-button--double' << h_view_button_active(:cards) do %>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        <% end %>
+      </div>
+    </div>
+
+
+    <div class='control-cnt'>
+      <div class="controls-title">
+        Товаров<br /> на странице
+      </div>
+      <div class='pagination-button'>
+        <div class='ch-option'>
+          <span class='ch-o-link'><%= session[:kaminari_per_page] || 12 %></span>
+          <ul class='ch-o-ul'>
+            <li class='ch-o-li'>12</li>
+            <li class='ch-o-li'>24</li>
+            <li class='ch-o-li'>60</li>
+            <li class='ch-o-li'>120</li>
+          </ul>
+        </div>
+
+        <%= paginate @tovar_models %>
+      </div>
+    </div>
+
+
+  </div>
+</div>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <%= render 'head' %>
+  <body class='<%= panel_state %>'>
+
+
+    <div class='ts-admin-container'>
+      <div class='container wrap'>
+        <%= render 'header' %>
+        <%= javascript_include_tag(:critical) %>
+
+        <main>
+          <section>
+            <%= render 'breadcrumbs_system' %>
+
+            <div class='goods-cnt'>
+              <% if action_name == 'show' %>
+                <div class='goods-cnt-nav'>
+                  <%= catalog_ul %>
+                  <div class='adv-cnt bg-fff'>
+                    <%= yield :filter %>
+                  </div>
+                </div>
+              <% end %>
+              <div class='goods-list-cnt'>
+                <%= yield :h1 %>
+                <div class='goods-content'>
+
+                  <% unless controller.class.to_s.deconstantize.to_sym == :TemplateSystem %>
+                    <%= yield %>
+                  <% end %>
+
+                </div>
+              </div>
+            </div>
+
+
+            <% if action_name == 'show' %>
+              <div class='content-cnt'>
+                <aside class='sidebar'>
+                  <%= render 'sidebar' %>
+                </aside>
+
+                <div class='content bg-fff'>
+                  <%= yield :content %>
+
+                  <% if controller.class.to_s.deconstantize.to_sym == :TemplateSystem %>
+                    <%= yield %>
+                  <% else %>
+                    <%= render_templates %>
+                  <% end %>
+
+                </div>
+              </div>
+            <% end %>
+          </section>
+        </main>
+
+        <%= render 'footer' %>
+        <%= render_current_basket %>
+      </div>
+    </div>
+
+    <%= render 'admin/panel/base' if @admin_panel %>
+    <%= yield :admin_stylesheets %>
+    <%= render 'javascripts' %>
+    <%= javascript_include_tag :admin_template_system if controller.class.to_s.deconstantize.to_sym == :TemplateSystem %>
+    <%= yield :admin_javascripts %>
+  </body>
+</html>

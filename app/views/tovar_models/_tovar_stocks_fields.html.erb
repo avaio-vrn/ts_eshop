@@ -1,0 +1,28 @@
+<div class='tovar-stocks-fields admin-stroke padd-lr'>
+  <div class='c-12'>
+    <div class='c-12'>
+      <%= f.label :date_start, class:'f-a-label' %>
+    </div>
+    <%= f.date_select :date_start, {}, class: 'f-a-input f-a-input--4' %>
+  </div>
+  <div class='c-12'>
+    <div class='c-12'>
+      <%= f.label :date_end, class:'f-a-label' %>
+    </div>
+    <%= f.date_select :date_end, {}, class: 'f-a-input f-a-input--4' %>
+  </div>
+  <div class='c-12 clfl'>
+    <div class='c-12 clfl'>
+      <%# f.label :content_text, class:'f-a-label' %>
+    </div>
+    <%# f.text_field :content_text, class: 'f-a-input' %>
+  </div>
+  <div class='c-12'>
+    <div class='c-12'>
+      <%= f.label :price, class:'f-a-label' %>
+    </div>
+    <%= f.number_field :price, class: 'f-a-input' %>
+  </div>
+
+  <%= link_to_remove_association '', f, {class:'element-close--inside element-close remove_fields dynamic', confirm: 'Удалить?',wrapper_class: 'admin-stroke'} %>
+</div>

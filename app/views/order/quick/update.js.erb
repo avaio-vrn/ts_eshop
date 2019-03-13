@@ -1,0 +1,12 @@
+$.magnificPopup.open({
+  items: {
+    src: '<%=j render @order_quick.blank? ? 'update_error_form' : 'update_form' %>',
+    type: 'inline',
+    closeBtnInside: true
+  },
+  closeOnBgClick: false
+});
+
+<% if @order_quick.type_name == 'basket' %>
+    setTimeout(function(){window.location.replace("/");}, 3000)
+<% end %>

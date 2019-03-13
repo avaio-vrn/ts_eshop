@@ -1,0 +1,55 @@
+<footer>
+  <div class="bg-fff clfl footer-main">
+    <div class='c-2 logo-links-cnt'>
+      <a href='/' class='logo-cnt'>
+        <figure>
+          <%= image_tag 'logo.png', alt: 'Логотип ProfФутбол' %>
+        </figure>
+      </a>
+      <div class='social-links'>
+        <%= link_to image_tag('instagram_ico.jpg'), 'https://www.instagram.com/proffootball.ru', rel: 'nofollow', class: 'social-link' %>
+        <%= link_to image_tag('vk_ico.jpg'), 'https://vk.com/proffootball_ru', rel: 'nofollow', class: 'social-link' %>
+      </div>
+    </div>
+
+    <div class='c-3'>
+      <div class='footer-title'>
+        КАТАЛОГ ТОВАРОВ
+      </div>
+      <ul class='footer-ul'>
+        <% Section.main_sections.each do |elem| %>
+          <li>
+            <%= link_to elem.content_name, elem, class: 'nav-link' %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+
+    <div class="c-4">
+      <div class='footer-title'>
+        ИНФОРМАЦИЯ
+      </div>
+      <ul class='footer-ul'>
+        <%= h_main_menu_li %>
+      </ul>
+    </div>
+    <div class='c-3'>
+      <div class='footer-title'>
+        КОНТАКТЫ
+      </div>
+      <div class='contacts-cnt'>
+        <span class='address'><%= @biz_info.address %></span>
+        <span class='phone'><%= @biz_info.phone %></span>
+        <span><%= mail_to @biz_info.email, @biz_info.email, class: 'email' %></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-fff">
+    <div class='ts--footer'>
+      <a href='https://temsys.ru' class='temsys-link'>Работает на платформе для создания сайтов TemSys</a>
+      <%= content_tag :span, 'сообщить разработчикам', class: 'message-to' %>
+    </div>
+  </div>
+</footer>
+

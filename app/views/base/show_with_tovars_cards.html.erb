@@ -1,0 +1,23 @@
+<%= content_for :javascripts do %>
+  <%= javascript_include_tag('sections') %>
+<% end %>
+<%= content_for :goods_content_css, ' section-goods-content' %>
+<%= provide :h1, content_tag(:h1, @section.content_header, class: config_get('html', 'h1_class')) %>
+
+<% unless @section.banner.blank? %>
+  <div class='c-12 padd-lr marg-b1'>
+    <%= image_tag @section.banner, class: 'banner--section' %>
+  </div>
+<% end %>
+
+<div class='items bg-fff js__goods'>
+  <% @welcome_goods.each do |goods| %>
+    <%= render '/sections/tovar_short', goods: goods %>
+  <% end %>
+</div>
+
+<div class='goods-list-btns goods-list-btns-end'>
+  <div class='goods-list-btn in-page js__paginate'>
+    <%= paginate @welcome_goods, remote: true, theme: 'inpage' %>
+  </div>
+</div>

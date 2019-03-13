@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html class='no-js'>
+  <%= render 'head', cashed: true %>
+  <body  class='<%= body_state %>'>
+    <div class='container wrap'>
+      <%= render 'header', cashed: true %>
+
+      <main>
+        <section>
+          <%= render 'breadcrumbs_system' %>
+
+          <div class='goods-cnt'>
+            <div class='content-cnt-full'>
+              <%= yield :h1 %>
+              <div class='content bg-fff'>
+                <%= yield %>
+                <%= yield :content %>
+                <%= render_templates %>
+              </div>
+            </div>
+          </div>
+
+
+          <div class='content-cnt'>
+            <aside class='sidebar sb-row'>
+              <%= render 'sidebar', cashed: true %>
+            </aside>
+
+          </div>
+        </section>
+      </main>
+
+      <%= render 'footer', cashed: true %>
+    </div>
+
+    <%= render 'javascripts' %>
+    <%= render_flashes %>
+  </body>
+</html>

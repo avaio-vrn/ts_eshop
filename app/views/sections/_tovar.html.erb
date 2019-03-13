@@ -1,0 +1,35 @@
+<div class='category-product-item clfl js__goods-wrap'>
+  <%= link_to goods.main_image(:big), class: 'category-product-image category-product-zoom image-link', rel: :nofollow do %>
+    <%= image_tag goods.main_image, class: 'category-product-img js__goods-image' %>
+  <% end %>
+  <div class='category-product-wrap'>
+    <%= link_to content_tag(:span, goods.content_name), goods, class: 'category-product-link' %>
+
+    <div class='spoiler spoiler--category'>
+      <div class='table-container table--category'>
+        <div class='trowhead'>
+          <% goods.property_types.each do |p_type| %>
+            <%= content_tag :span, content_tag(:i, p_type), class: :thead %>
+          <% end %>
+        </div>
+        <% goods.union_property_values.each do |_k, v| %>
+          <div class='trow'>
+            <% goods.all_model_property_types.each do |p_type| %>
+              <%= content_tag :span, v[p_type.id.to_s], class: :tcell %>
+            <% end %>
+            <div class='item-price'>
+              <%= rub_price_helper price: v[:price] %>
+              <span class='addcart' data-id='<%= v[:id] %>'> </span>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <% if goods.union_property_values.size > 5 %>
+      <span class='button button--category arrow-down js__button' data-close='false' data-assoc='spoiler' data-assoc-c='spoiler--active' data-active='arrow-top' data-inactive='arrow-down' data-container='.category-product-wrap'>
+        Еще модели
+      </span>
+    <% end %>
+  </div>
+</div>

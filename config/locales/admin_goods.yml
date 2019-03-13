@@ -1,0 +1,12 @@
+ru:
+  health_check:
+    index:
+      header_h1: "'Здоровье' интернет-магазина"
+  admin/goods/health_check:
+    show:
+      header_h1: "'Здоровье' интернет-магазина"
+  goods_errors:
+    index:
+      header_h1: Товары с возможными ошибками
+    show:
+      header_h1: Товары с возможными ошибками

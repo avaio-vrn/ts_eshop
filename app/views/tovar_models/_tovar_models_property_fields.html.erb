@@ -1,0 +1,5 @@
+<div class='property-field'>
+  <%= f.hidden_field :property_type_id %>
+  <%= f.label :value, PropertyType.find(f.object.property_type_id).content_name, class:'f-a-label' %>
+  <%= f.text_field :value, class: 'f-a-input' %>
+</div>

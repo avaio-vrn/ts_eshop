@@ -1,0 +1,14 @@
+<%= form_for(@roots_type, url: properties_roots_types_path, html: { class:"template-form js__template-system" }) do |f| %>
+	<%= render "form_errors", object: f.object %>
+
+  <%= f.hidden_field :root_type %>
+  <%= f.hidden_field :root_id %>
+
+	<div class="c-6">
+		<div class="f-a-left">
+			<%= f.label :type_id, class:"f-a-label" %>
+      <%= f.collection_select :type_id, ::Properties::Type.ordering, :id, :to_s, {}, class:"f-a-input" %>
+		</div>
+	</div>
+	<div class="clearfloat"></div>
+<% end %>

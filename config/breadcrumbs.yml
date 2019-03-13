@@ -1,0 +1,28 @@
+:home_page: Главная
+:parent:
+  :no_index:
+  :parent: :parent
+  :parent_name:
+:sections:
+  :no_index:
+  :parent: :parent
+  :parent_name:
+:tovars:
+  :parent: :sections
+  :parent_name:
+:tovar_models:
+  :parent: :tovars
+  :parent_name:
+:baskets:
+  :no_index:
+  :parent:
+:page_contents:
+  :no_index:
+  :parent:
+:users:
+  :no_index:
+  :parent:
+  :path: '/users'
+:news_posts:
+  :parent:
+  :parent_name:

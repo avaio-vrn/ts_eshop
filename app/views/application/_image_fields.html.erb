@@ -1,0 +1,17 @@
+<div class="image-field admin-stroke clfl js__nested-fields">
+  <div class="c-6 padd-lr clfl">
+    <div class="image">
+      <%= image_tag(f.object.url(:thumb), class: 'js__image-preview') %>
+    </div>
+  </div>
+  <div class="c-6 padd-r">
+    <div class="f-a-file-container">
+      <span class="button-mid">Выбрать файл</span>
+      <%= f.file_field :file, class: 'f-a-file' %>
+    </div>
+  </div>
+
+  <% unless local_assigns[:without_remove]  %>
+    <%= link_to_remove_association '', f, { class:'element-close', confirm: 'Удалить?', wrapper_class: 'admin-stroke' } %>
+  <% end %>
+</div>

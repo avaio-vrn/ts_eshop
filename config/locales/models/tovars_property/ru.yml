@@ -1,0 +1,12 @@
+ru:
+  tovars_property: свойство товара
+  activerecord:
+    models:
+      tovars_property: Свойство товара
+      accusative:
+        tovars_property: свойство товара
+    attributes:
+      tovars_property:
+        in_card_prop: отображать в карточке
+        filter_prop: для фильтра
+        similar_prop: для отбора похожих

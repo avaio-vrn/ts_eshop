@@ -1,0 +1,34 @@
+<% if Rails.env == 'production' %>
+  <% unless current_user&.admin_less? %>
+    <%= javascript_tag do %>
+      var TS = { vars: {}};
+      <% unless @biz_info.ym.blank? %>
+        TS.vars.ymetrika = '<%= @biz_info.ym %>';
+      <% end %>
+      <% unless @biz_info.ga.blank? %>
+        TS.vars.ganalytics = '<%= @biz_info.ga %>';
+      <% end %>
+    <% end %>
+
+    <% unless @biz_info.ym.blank?  %>
+      <noscript>
+        <%= content_tag :div, image_tag("https://mc.yandex.ru/watch/#{@biz_info.ym}", style: "position:absolute; left:-9999px;") %>
+      </noscript>
+    <% end %>
+  <% end %>
+<% end %>
+
+<%= javascript_include_tag "application" %>
+<%= javascript_include_tag "client/ts_async", async: true %>
+<%= javascript_include_tag "client/counters#{@biz_info.ym2 ? '2' : nil}_ecomm", async: true %>
+<%= javascript_include_tag "async".freeze %>
+
+<%= yield :javascripts %>
+
+<% if params[:action] == "new".freeze || params[:action] == "edit".freeze || params[:action] == 'copy'.freeze %>
+  <%= javascript_include_tag "select2".freeze %>
+  <%= javascript_include_tag "admin/select2_translate_ru".freeze %>
+  <%= javascript_include_tag "admin/tovar".freeze if(params[:controller] == "tovars".freeze) %>
+<% end %>
+
+

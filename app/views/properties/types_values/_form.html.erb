@@ -1,0 +1,23 @@
+<%= form_for(@types_value, url: properties_types_values_path, html: { class:"template-form js__template-system" }) do |f| %>
+	<%= render "form_errors", object: f.object %>
+
+  <%= f.hidden_field :root_type %>
+  <%= f.hidden_field :root_id %>
+
+	<div class="c-6">
+		<div class="f-a-left">
+			<%= f.label :root_id, class:"f-a-label" %>
+      <%= f.collection_select :root_id, ::Properties::TypesValues.root_get(params['properties_types_values']).ordering, :id, :to_s, {}, class:"f-a-input" %>
+
+			<%= f.label :type_id, class:"f-a-label" %>
+      <%= f.collection_select :type_id, ::Properties::Type.by_params(params['properties_types_values']), :id, :to_s, {}, class:"f-a-input" %>
+		</div>
+	</div>
+	<div class="c-6">
+		<div class="f-a-right">
+			<%= f.label :value_id, class:"f-a-label" %>
+      <%= f.collection_select :value_id, ::Properties::Value.ordering, :id, :to_s, {}, class:"f-a-input" %>
+		</div>
+	</div>
+	<div class="clearfloat"></div>
+<% end %>

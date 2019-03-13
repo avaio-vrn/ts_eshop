@@ -1,0 +1,14 @@
+<div class="magnific-container">
+  <div class="magnific-title">
+    Ваш мобильный телефон
+  </div>
+  <%= form_for @order_quick, url: order_quick_index_path, remote: true, validate: true, html: { class: 'magnific-form' } do |f| %>
+    <%= f.hidden_field :type_name %>
+    <%= f.hidden_field :type_id %>
+    <label class="magnific-label" for="contact_form_contacts">Мобильный телефон (с 8 и кодом)*:</label>
+    <%= f.text_field :phone, class: 'magnific-input nomarg'%>
+    <p class='form-notice'>На этот номер будет выслан код подтверждения. Только для РФ.</p>
+
+    <input class="magnific-submit" type="submit" value="Подтвердить" />
+  <% end %>
+</div>

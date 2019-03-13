@@ -1,0 +1,10 @@
+ru:
+  image: изображение
+  activerecord:
+    models:
+      image: Изображение
+      accusative:
+        image: изображение
+    attributes:
+      image:
+        watermark: "Водяной знак"

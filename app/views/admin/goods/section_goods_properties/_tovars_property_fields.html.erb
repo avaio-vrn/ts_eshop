@@ -1,0 +1,24 @@
+<div class='property-field admin-stroke'>
+  <%= f.label "Свойство", class:'f-a-label' %>
+  <%= f.hidden_field :property_type_id, class:'f-a-input nomarg property-dropdown' %>
+
+  <label class="f-a-checkbox">
+    <%= f.check_box :in_card_prop %>
+    <span class="f-a-checkbox-span"></span>
+    <%= content_tag :span, ::TovarsProperty.human_attribute_name(:in_card_prop), class: 'f-a-label' %>
+  </label>
+
+  <label class="f-a-checkbox fl-l padd-r">
+    <%= f.check_box :filter_prop %>
+    <span class="f-a-checkbox-span"></span>
+    <%= content_tag :span, ::TovarsProperty.human_attribute_name(:filter_prop), class: 'f-a-label' %>
+  </label>
+
+  <label class="f-a-checkbox">
+    <%= f.check_box :similar_prop %>
+    <span class="f-a-checkbox-span"></span>
+    <%= content_tag :span, ::TovarsProperty.human_attribute_name(:similar_prop), class: 'f-a-label' %>
+  </label>
+
+  <%= link_to_remove_association '', f, { class:'element-close element-close--inside', confirm: 'Удалить?',wrapper_class: 'admin-stroke' } %>
+</div>

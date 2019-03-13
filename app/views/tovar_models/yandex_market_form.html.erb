@@ -1,0 +1,31 @@
+<%= form_for(@tovar_model, html:{class:'form-add js__template-system'}) do |f| %>
+  <%= render "form_errors", object: f.object %>
+
+  <div class="c-6 padd-lr">
+    <div class="f-a-left">
+
+      <%= f.fields_for :yandex_market do |ya| %>
+        <%= ya.label :category_id, class: 'f-a-label' %>
+        <%= ya.collection_select :category_id, YandexMarket::Category.list, :first, :last, { include_blank: true }, class:'f-a-input' %>
+
+        <%= ya.label :description, class: 'f-a-label' %>
+        <%= ya.text_area :description, class:'f-a-input' %>
+      <% end %>
+
+    </div>
+  </div>
+
+  <div class='c-6 padd-lr'>
+    <div class='f-a-right'>
+      <%= f.fields_for :yandex_market do |ya| %>
+        <%= ya.label :prefix, class: 'f-a-label' %>
+        <%= ya.text_field :prefix, class:'f-a-input' %>
+
+        <%= ya.label :model_name, class: 'f-a-label' %>
+        <%= ya.text_field :model_name, class:'f-a-input' %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="clearfloat"></div>
+<% end %>

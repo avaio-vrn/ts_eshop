@@ -1,0 +1,10 @@
+<% records.each_with_index do |page, index| %>
+  <div class="admin-stroke clfl" data-index='<%= index %>'>
+    <div class='c-9'>
+      <%= page.to_s %>
+    </div>
+    <div class='c-3'>
+      <%= button_tag 'Записать', class: 'f-a-button js__save'  %>
+    </div>
+  </div>
+<% end %>
