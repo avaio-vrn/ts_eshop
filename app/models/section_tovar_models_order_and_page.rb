@@ -2,7 +2,7 @@
 
 class SectionTovarModelsOrderAndPage
   def initialize(section, session, page=nil)
-    tovar_models = section.tovar_models.available.group(:tovar_id)
+    tovar_models = section.tovar_models.available.group('tovar_models.tovar_id')
     tovar_models =
       if session[:section_order].nil?
         tovar_models.order('tovars.row_num')
